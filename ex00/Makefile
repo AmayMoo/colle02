@@ -1,6 +1,6 @@
 NAME = colle-2
 
-SRC = ./srcs/main.c ./srcs/util.c
+SRC = ./srcs/check_colle00.c ./srcs/check_colle01.c ./srcs/check_colle02.c ./srcs/check_colle03.c ./srcs/check_colle04.c ./srcs/util.c
 
 FLAGS = -Wall -Wextra -Werror
 HEADER = ./includes
