@@ -1,5 +1,6 @@
 #include "libft.h"
 
+
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -52,7 +53,8 @@ void my_memcpy(char * src, char * dest, int len){
 	int i = 0;
 
 	while(i < len){
-		src[i] = dest[i];
+		dest[i] = src[i];
+		i++;
 	}
 }
 
@@ -61,8 +63,9 @@ char * readline(void)
 	char buff[256];
 	int offset;
 	
+	offset = 0;
+
 	while( (buff[offset ++] = read_stdin())){
-		
 		if(buff[offset - 1] == '\n')
 		{
 			buff[offset - 1] = '\0';
@@ -82,27 +85,66 @@ char * readline(void)
 	return (NULL);
 }
 
+t_list	*add_line(t_list *head, char *line)
+{
+	t_list	*new_node;
+	t_list	*tmp;
 
-char ** readlines(void){
-	return (NULL);	
+
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (new_node == NULL){
+		return (NULL);
+	}
+	new_node->line = line;
+	new_node->next = NULL;
+	if (head == NULL){
+		return (new_node);
+	}
+	tmp = head;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+	tmp->next = new_node;
+	return (head);
 }
 
+char	**readlines(int * nb_lines)
+{
+	t_list	*head;
+	t_list	*current;
+	char	*line;
+	char	**array;
+	int		count;
 
-char ** listToArray( int ret_size){
-/*	int size = listSize()
-	char ** array = (char **) malloc(size);
-	
-	*ret_size = 0;
-	
-	pCurrent = fist_elem;
+	*nb_lines = 0;
 
-	while(pCurrent != NULL){
-		array[(*ret_size)++] = (char *) pCurrent->data;
-		pCurrent = pCurrent->next;
+	head = NULL;
+
+	while ((line = readline()) != NULL)
+		head = add_line(head, line);
+	if (head == NULL)
+		return (NULL);
+	count = 0;
+
+	current = head;
+	while (current != NULL)
+	{
+		count++;
+		current = current->next;
 	}
 
-	return array;
-	*/
+	array = (char **)malloc((count  )  * sizeof(char *));
+	if (array == NULL)
+		return (NULL);
+	count = 0;
 
-	return (NULL);
+	current = head;
+	while (current != NULL)
+	{
+		array[count] = current->line;
+		count++;
+		current = current->next;
+	}
+	*nb_lines = count ;
+	return (array);	
 }
+

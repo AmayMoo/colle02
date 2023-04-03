@@ -87,17 +87,20 @@ int	check_colle04(char **tab, int width, int height)
 	{
 		return (1);
 	}
-	if (check_last_line4(tab[height - 1], width) != 0)
+	if(height > 1)
 	{
-		return (1);
-	}
-	while (current_line < height - 1)
-	{
-		if (check_inter_line4(tab[current_line], width) != 0)
+		if (check_last_line4(tab[height - 1], width) != 0)
 		{
 			return (1);
 		}
-		current_line++;
+		while (current_line < height - 1)
+		{
+			if (check_inter_line4(tab[current_line], width) != 0)
+			{
+				return (1);
+			}
+			current_line++;
+		}
 	}
 	return (0);
 }

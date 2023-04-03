@@ -1,9 +1,11 @@
 #include "libft.h"
 
+
 /*check first line corresponds to expected(o---o)*/
 int	check_first_line0(char *line, int size)
 {
 	int	current_offset;
+
 
 	current_offset = 0;
 	if (line[current_offset++] != 'o')
@@ -90,6 +92,8 @@ int	check_colle00(char **tab, int width, int height)
 	{
 		return (1);
 	}
+
+
 	if (check_last_line0(tab[height - 1], width) != 0)
 	{
 		return (1);

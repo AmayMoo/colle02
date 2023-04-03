@@ -1,5 +1,6 @@
 #include "libft.h"
 
+
 void	putresult(int * result, int result_size, int width, int height)
 {
 	int aucune;
@@ -8,6 +9,7 @@ void	putresult(int * result, int result_size, int width, int height)
 
 	aucune = 1;
 	index = 0;
+
 	while(index < result_size){
 		char buffer[256];
 		if(result[index] == 0)
@@ -15,6 +17,7 @@ void	putresult(int * result, int result_size, int width, int height)
 			index_buffer = 0;
 			if(aucune == 0)
 			{
+				buffer[index_buffer++] = ' ';
 				buffer[index_buffer++] = '|';
 				buffer[index_buffer++] = '|';
 				buffer[index_buffer++] = ' ';
@@ -42,10 +45,13 @@ void	putresult(int * result, int result_size, int width, int height)
 
 			aucune = 0;
 		}
+
+		index ++;
 	}
 
 	if(aucune == 1)
 	{
 		ft_putstr("aucune");
 	}
+	ft_putstr("\n");
 }
