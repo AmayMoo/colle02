@@ -35,15 +35,21 @@ void	ft_putstr(char *str)
 	}
 }
 
-int	ft_strlen(char *str)
+char	*read_stdin(void)
 {
-	int	len;
+	char			buff[1];
+	int				i;
+	int				ret;
+	char			*tab;
 
-	len = 0;
-	while (*str)
+	tab = malloc(sizeof(*tab));
+	i = 0;
+	while ((ret = read(0, buff, BUFFER_SIZE)))
 	{
-		len++;
-		str++;
+		if (ret == 0)
+			return ("aucune\n");
+		tab[i] = buff[0];
+		i++;
 	}
-	return (len);
+	return (tab);
 }

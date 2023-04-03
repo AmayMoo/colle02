@@ -1,7 +1,7 @@
 #include "libft.h"
 
 /*check first line corresponds to expected(o---o)*/
-int	check_first_line(char *line, int size)
+int	check_first_line0(char *line, int size)
 {
 	int	current_offset;
 
@@ -28,7 +28,7 @@ int	check_first_line(char *line, int size)
 }
 
 /*check intermediate line corresponds to expected(|   |)*/
-int	check_inter_line(char *line, int size)
+int	check_inter_line0(char *line, int size)
 {
 	int	current_offset;
 
@@ -55,7 +55,7 @@ int	check_inter_line(char *line, int size)
 }
 
 /*check last line corresponds to expected(o---o)*/
-int	check_last_line(char *line, int size)
+int	check_last_line0(char *line, int size)
 {
 	int	current_offset;
 
@@ -86,17 +86,17 @@ int	check_colle00(char **tab, int width, int height)
 	int	current_line;
 
 	current_line = 1;
-	if (check_first_line(tab[0], width) != 0)
+	if (check_first_line0(tab[0], width) != 0)
 	{
 		return (1);
 	}
-	if (check_last_line(tab[height - 1], width) != 0)
+	if (check_last_line0(tab[height - 1], width) != 0)
 	{
 		return (1);
 	}
 	while (current_line < height - 1)
 	{
-		if (check_inter_line(tab[current_line], width) != 0)
+		if (check_inter_line0(tab[current_line], width) != 0)
 		{
 			return (1);
 		}
