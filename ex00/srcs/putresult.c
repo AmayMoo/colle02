@@ -1,32 +1,51 @@
 #include "libft.h"
 
-void	putresult(char **str, int width, int height)
+void	putresult(int * result, int result_size, int width, int height)
 {
-	int	colle;
+	int aucune;
+	int index;
+	int index_buffer;
 
-	colle = which_colle(str, width, height);
-	if (colle == 1)
+	aucune = 1;
+	index = 0;
+	while(index < result_size){
+		char buffer[256];
+		if(result[index] == 0)
+		{
+			index_buffer = 0;
+			if(aucune == 0)
+			{
+				buffer[index_buffer++] = '|';
+				buffer[index_buffer++] = '|';
+				buffer[index_buffer++] = ' ';
+			}
+
+			buffer[index_buffer++] = '[';
+			buffer[index_buffer++] = 'c';
+			buffer[index_buffer++] = 'o';
+			buffer[index_buffer++] = 'l';
+			buffer[index_buffer++] = 'l';
+			buffer[index_buffer++] = 'e';
+			buffer[index_buffer++] = '0';
+			buffer[index_buffer++] = '0' + index;
+			buffer[index_buffer++] = ']';
+			buffer[index_buffer++] = ' ';
+			buffer[index_buffer++] = '[';
+			buffer[index_buffer++] = '0' + width;
+			buffer[index_buffer++] = ']';
+			buffer[index_buffer++] = ' ';
+			buffer[index_buffer++] = '[';
+			buffer[index_buffer++] = '0' + height;
+			buffer[index_buffer++] = ']';
+
+			ft_putstr(buffer);
+
+			aucune = 0;
+		}
+	}
+
+	if(aucune == 1)
 	{
 		ft_putstr("aucune");
-	}
-	if (check_colle00(str, width, height) == 0)
-	{
-		ft_putstr("colle-00 ");
-	}
-	if (check_colle01(str, width, height) == 0)
-	{
-		ft_putstr("colle-01 ");
-	}
-	if (check_colle02(str, width, height) == 0)
-	{
-		ft_putstr("colle-02 ");
-	}
-	if (check_colle03(str, width, height) == 0)
-	{
-		ft_putstr("colle-03 ");
-	}
-	if (check_colle04(str, width, height) == 0)
-	{
-		ft_putstr("colle-04 ");
 	}
 }

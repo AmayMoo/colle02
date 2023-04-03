@@ -35,21 +35,74 @@ void	ft_putstr(char *str)
 	}
 }
 
-char	*read_stdin(void)
+char read_stdin(void)
 {
-	char			buff[1];
-	int				i;
-	int				ret;
-	char			*tab;
+	int ret;
+	char c;
+	
+	ret = read(0, &c, sizeof(c));
+	
+	if (ret == 0)
+		return ('\0');
 
-	tab = malloc(sizeof(*tab));
-	i = 0;
-	while ((ret = read(0, buff, BUFFER_SIZE)))
-	{
-		if (ret == 0)
-			return ("aucune\n");
-		tab[i] = buff[0];
-		i++;
+	return c;
+}
+
+void my_memcpy(char * src, char * dest, int len){
+	int i = 0;
+
+	while(i < len){
+		src[i] = dest[i];
 	}
-	return (tab);
+}
+
+char * readline(void)
+{
+	char buff[256];
+	int offset;
+	
+	while( (buff[offset ++] = read_stdin())){
+		
+		if(buff[offset - 1] == '\n')
+		{
+			buff[offset - 1] = '\0';
+
+			char * ret = (char *) malloc(offset);
+			my_memcpy(buff, ret, offset);
+			return ret;
+		}
+	}
+
+	if(offset > 1){
+		char * ret = (char *) malloc(offset);
+		my_memcpy(buff, ret, offset);
+		return ret;
+	}
+
+	return (NULL);
+}
+
+
+char ** readlines(void){
+	return (NULL);	
+}
+
+
+char ** listToArray( int ret_size){
+/*	int size = listSize()
+	char ** array = (char **) malloc(size);
+	
+	*ret_size = 0;
+	
+	pCurrent = fist_elem;
+
+	while(pCurrent != NULL){
+		array[(*ret_size)++] = (char *) pCurrent->data;
+		pCurrent = pCurrent->next;
+	}
+
+	return array;
+	*/
+
+	return (NULL);
 }

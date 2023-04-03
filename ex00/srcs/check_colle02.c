@@ -1,10 +1,16 @@
 #include "libft.h"
+//#include <stdio.h>
+
+
+//#define DEBUG_PRINT(e, f) printf("%s:%d --> expected %c / found %c\n", __FUNCTION__, __LINE__, e, f)
 
 int	check_first_line2(char *line, int size)
 {
 	int	current_offset;
 
 	current_offset = 0;
+
+	//DEBUG_PRINT('A', line[current_offset]);
 	if (line[current_offset++] != 'A')
 	{
 		return (1);
@@ -13,11 +19,14 @@ int	check_first_line2(char *line, int size)
 	{
 		while (current_offset < (size - 1))
 		{		
+			//DEBUG_PRINT('B', line[current_offset]);
 			if (line[current_offset++] != 'B')
 			{
 				return (1);
 			}
 		}
+
+		//DEBUG_PRINT('A', line[current_offset]);
 		if (line[current_offset] != 'A')
 		{
 			return (1);
@@ -31,6 +40,9 @@ int	check_inter_line2(char *line, int size)
 	int	current_offset;
 
 	current_offset = 0;
+
+	//DEBUG_PRINT('A', line[current_offset]);
+
 	if (line[current_offset++] != 'B')
 	{
 		return (1);
@@ -39,11 +51,13 @@ int	check_inter_line2(char *line, int size)
 	{
 		while (current_offset < (size - 1))
 		{
+			//DEBUG_PRINT(' ', line[current_offset]);
 			if (line[current_offset++] != ' ')
 			{
 				return (1);
 			}
 		}
+		//DEBUG_PRINT('B', line[current_offset]);
 		if (line[current_offset] != 'B')
 		{
 			return (1);
@@ -57,6 +71,7 @@ int	check_last_line2(char *line, int size)
 	int	current_offset;
 
 	current_offset = 0;
+	//DEBUG_PRINT('C', line[current_offset]);
 	if (line[current_offset++] != 'C')
 	{
 		return (1);
@@ -65,11 +80,13 @@ int	check_last_line2(char *line, int size)
 	{
 		while (current_offset < (size - 1))
 		{
+			//DEBUG_PRINT('B', line[current_offset]);
 			if (line[current_offset++] != 'B')
 			{
 				return (1);
 			}
 		}
+		//DEBUG_PRINT('C', line[current_offset]);
 		if (line[current_offset] != 'C')
 		{
 			return (1);
@@ -87,17 +104,20 @@ int	check_colle02(char **tab, int width, int height)
 	{
 		return (1);
 	}
-	if (check_last_line2(tab[height - 1], width) != 0)
-	{
-		return (1);
-	}
-	while (current_line < height - 1)
-	{
-		if (check_inter_line2(tab[current_line], width) != 0)
+
+	if(height > 1){
+		if (check_last_line2(tab[height - 1], width) != 0)
 		{
 			return (1);
 		}
-		current_line++;
+		while (current_line < height - 1)
+		{
+			if (check_inter_line2(tab[current_line], width) != 0)
+			{
+				return (1);
+			}
+			current_line++;
+		}
 	}
 	return (0);
 }
