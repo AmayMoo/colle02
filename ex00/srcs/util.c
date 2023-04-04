@@ -1,6 +1,5 @@
 #include "libft.h"
 
-
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
@@ -36,52 +35,54 @@ void	ft_putstr(char *str)
 	}
 }
 
-char read_stdin(void)
+char	read_stdin(void)
 {
-	int ret;
-	char c;
-	
-	ret = read(0, &c, sizeof(c));
-	
-	if (ret == 0)
-		return ('\0');
+	int		ret;
+	char	c;
 
-	return c;
+	ret = read(0, &c, sizeof(c));
+	if (ret == 0)
+	{
+		return ('\0');
+	}
+	return (c);
 }
 
-void my_memcpy(char * src, char * dest, int len){
-	int i = 0;
+void	my_memcpy(char *src, char *dest, int len)
+{
+	int	i;
 
-	while(i < len){
+	i = 0;
+	while (i < len)
+	{
 		dest[i] = src[i];
 		i++;
 	}
 }
 
-char * readline(void)
+char	*readline(void)
 {
-	char buff[256];
-	int offset;
-	
-	offset = 0;
+	char	*ret;
+	char	buff[256];
+	int		offset;
 
-	while( (buff[offset ++] = read_stdin())){
-		if(buff[offset - 1] == '\n')
+	offset = 0;
+	while ((buff[offset ++] = read_stdin()))
+	{
+		if (buff[offset - 1] == '\n')
 		{
 			buff[offset - 1] = '\0';
-
-			char * ret = (char *) malloc(offset);
+			ret = (char *) malloc(offset);
 			my_memcpy(buff, ret, offset);
-			return ret;
+			return (ret);
 		}
 	}
-
-	if(offset > 1){
-		char * ret = (char *) malloc(offset);
+	if (offset > 1)
+	{
+		ret = (char *) malloc(offset);
 		my_memcpy(buff, ret, offset);
-		return ret;
+		return (ret);
 	}
-
 	return (NULL);
 }
 
@@ -90,24 +91,27 @@ t_list	*add_line(t_list *head, char *line)
 	t_list	*new_node;
 	t_list	*tmp;
 
-
 	new_node = (t_list *)malloc(sizeof(t_list));
-	if (new_node == NULL){
+	if (new_node == NULL)
+	{
 		return (NULL);
 	}
 	new_node->line = line;
 	new_node->next = NULL;
-	if (head == NULL){
+	if (head == NULL)
+	{
 		return (new_node);
 	}
 	tmp = head;
 	while (tmp->next != NULL)
+	{
 		tmp = tmp->next;
+	}
 	tmp->next = new_node;
 	return (head);
 }
 
-char	**readlines(int * nb_lines)
+char	**readlines(int *nb_lines)
 {
 	t_list	*head;
 	t_list	*current;
@@ -116,27 +120,28 @@ char	**readlines(int * nb_lines)
 	int		count;
 
 	*nb_lines = 0;
-
 	head = NULL;
-
 	while ((line = readline()) != NULL)
+	{
 		head = add_line(head, line);
+	}
 	if (head == NULL)
+	{
 		return (NULL);
+	}
 	count = 0;
-
 	current = head;
 	while (current != NULL)
 	{
 		count++;
 		current = current->next;
 	}
-
-	array = (char **)malloc((count  )  * sizeof(char *));
+	array = (char **)malloc((count) * sizeof(char *));
 	if (array == NULL)
+	{
 		return (NULL);
+	}
 	count = 0;
-
 	current = head;
 	while (current != NULL)
 	{
@@ -145,6 +150,5 @@ char	**readlines(int * nb_lines)
 		current = current->next;
 	}
 	*nb_lines = count ;
-	return (array);	
+	return (array);
 }
-

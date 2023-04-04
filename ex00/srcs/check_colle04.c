@@ -87,7 +87,7 @@ int	check_colle04(char **tab, int width, int height)
 	{
 		return (1);
 	}
-	if(height > 1)
+	if (height > 1)
 	{
 		if (check_last_line4(tab[height - 1], width) != 0)
 		{
